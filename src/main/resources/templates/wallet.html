@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Crypto Currency Wallet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="ISO-8859-1" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Your Crypto Wallet</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Code</th>
+			<th>Holding</th>
+			<th>Averaged Buying Price</th>
+		</tr>
+		<tr th:each="wallet:${wallets}">
+			<td th:text="${wallet.name}" />
+			<td th:text="${wallet.code}" />
+			<td th:text="${wallet.quantity}" />
+			<td th:text="${wallet.avgPrice}" />
+		</tr>
+	</table>
+	<a href="/transactions" class="btn btn-success">Transactions</a>
+</body>

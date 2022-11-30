@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Crypto Currency Transactions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="ISO-8859-1" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<body>
+
+		<div class="col-md-4">
+		<h1>Transactions</h1>
+	</div>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Code</th>
+			<th>Price</th>
+			<th>Holding</th>
+			<th>Date Bought</th>
+		</tr>
+		<tr th:each = "crypto: ${cryptos}">
+			<td th:text="${crypto.name}"></td>
+			<td th:text="${crypto.code}"></td>
+			<td th:text="${#numbers.formatDecimal(crypto.boughtPrice,2,3)}"></td>
+			<td th:text="${#numbers.formatDecimal(crypto.quantity,1,3)}"></td>
+			<td th:text="${crypto.dateBought}"></td>
+			<td><a th:href="@{/edit/{id}(id=${crypto.id})}">Edit</a></td>
+			<td><a th:href = "@{/delete/{id}(id = ${crypto.id})}"  class="btn btn-danger" >Delete</a></td>
+
+			
+		</tr>
+	</table>
+	<a href="/add" class="btn btn-success">Add Crypto</a>
+	<a href="/wallet" class="btn btn-primary">Wallet</a>
+</body>
+</html>
